@@ -20,8 +20,7 @@ public class UserController {
 	private UserServiceImpl userServiceImpl;
 
 	 @RequestMapping(method = RequestMethod.GET)
-	    public String getBookList(ModelMap modelMap) {
-	        log.info("获取用户信息.");
+	    public String getBookList(ModelMap modelMap) {	       
 	        modelMap.addAttribute("userList", userServiceImpl.queryAllUser());
 	        return USER_LIST_PATH_NAME;
 	    }
