@@ -10,4 +10,6 @@ import cn.com.demo.system.entity.User;
 public interface IUserDao {
 
 	List<User>queryAllUser();
+	
+	List<User> logonAudit(String username,String password);
 }
