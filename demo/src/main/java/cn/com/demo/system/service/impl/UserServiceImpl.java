@@ -18,6 +18,9 @@ public class UserServiceImpl implements IUserService{
 	private IUserDao iUserDao;
 	
 
+	/**
+	 * 获取所有用户
+	 */
 	public List<User> queryAllUser() {
 		return iUserDao.queryAllUser();
 	}

@@ -1,6 +1,6 @@
 package cn.com.demo.system.dao.impl;
 
-import java.awt.print.Book;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,6 +21,10 @@ public class UserDaoImpl implements IUserDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * 获取所有用户
+	 * 
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public List<User> queryAllUser() {
@@ -38,8 +42,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User updateUser(User user) {
 		String sql = "UPDATE USER SET username=?,password=? WHERE id=?";
-		int i = jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getId());
-		System.out.println("更新用户id是：" + user.getId());
+		jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getId());		
 		return user;
 	}
 
