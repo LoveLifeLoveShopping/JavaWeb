@@ -27,6 +27,31 @@ public class UserServiceImpl implements IUserService{
 	public List<User> logonAudit(String username, String password) {		
 		return iUserDao.logonAudit(username, password);
 	}
+
+
+	@Override
+	public User updateUser(User user) {
+		// TODO Auto-generated method stub
+		return iUserDao.updateUser(user);
+	}
+
+
+	@Override
+	public User addUser(User user) {		
+		return iUserDao.addUser(user);
+	}
+
+
+	@Override
+	public void deleteUser(int id) {
+		iUserDao.deleteUser(id);		
+	}
+
+
+	@Override
+	public User getUser(int id) {	
+		return iUserDao.getUser(id);
+	}
 	
 
 }

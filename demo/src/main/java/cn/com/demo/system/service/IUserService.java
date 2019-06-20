@@ -9,4 +9,12 @@ public interface IUserService {
 	List<User>queryAllUser();
 	
 	List<User> logonAudit(String username,String password);
+	
+	User updateUser(User user);
+	
+	User addUser(User user);
+	
+	void deleteUser(int id);
+	
+	User getUser(int id);
 }
