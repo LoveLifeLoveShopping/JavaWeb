@@ -17,8 +17,10 @@ public interface IUserDao {
 	
 	User addUser(User user);
 	
-	void deleteUser(int id);
+	int deleteUser(int id);
 	
 	User getUser(int id);
+	
+
 	
 }

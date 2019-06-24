@@ -120,5 +120,19 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "updateuser";
 	}
+	
+	/**
+	 * 删除用户
+	 * @param modelMap
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/deleteUser")
+	public String deleteUser(ModelMap modelMap, int id,HttpSession session) {
+		int arg0 = userServiceImpl.deleteUser(id);
+		session.setAttribute("deleteUserArg0", arg0);
+		modelMap.addAttribute("homepage", userServiceImpl.queryAllUser());
+		return "homepage";
+	}
 
 }
