@@ -84,4 +84,23 @@ public class UserDaoImpl implements IUserDao {
 
 	}
 
+	/**
+	 * 
+	 * 用户分页查询
+	 */
+	@Override
+	public List<User> queryUserbyPage(int pagenum, int pagerow) {
+		int starter = (pagenum-1)*pagerow;
+		 String sql = "select id, username, password from user order by id asc  limit " + starter +" , "+ pagerow;
+		 List<User> list = jdbcTemplate.query(sql,new UserRowMapper());
+		return list;
+	}
+
+	@Override
+	public int countAllUser() {
+		String sql = "select  count(1)  from user  " ;
+		int countAllUaer = jdbcTemplate.queryForObject(sql, Integer.class);
+		return countAllUaer;
+	}
+
 }

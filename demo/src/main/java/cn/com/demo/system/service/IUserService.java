@@ -17,4 +17,16 @@ public interface IUserService {
 	int deleteUser(int id);
 	
 	User getUser(int id);
+	/**
+	 * 分页查询用户
+	 * @param pagenum
+	 * @param pagerow
+	 * @return
+	 */
+	List<User>queryUserbyPage(int pagenum, int pagerow);
+	/**
+	 * 统计用户数量
+	 * @return
+	 */
+	int countAllUser();
 }

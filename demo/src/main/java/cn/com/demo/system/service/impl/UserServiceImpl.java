@@ -56,6 +56,18 @@ public class UserServiceImpl implements IUserService{
 	public User getUser(int id) {	
 		return iUserDao.getUser(id);
 	}
+
+
+	@Override
+	public List<User> queryUserbyPage(int pagenum, int pagerow) {		
+		return iUserDao.queryUserbyPage(pagenum, pagerow);
+	}
+
+
+	@Override
+	public int countAllUser() {		
+		return iUserDao.countAllUser();
+	}
 	
 
 }
