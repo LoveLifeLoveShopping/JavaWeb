@@ -91,7 +91,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> queryUserbyPage(int pagenum, int pagerow) {
 		int starter = (pagenum-1)*pagerow;
-		 String sql = "select id, username, password from user order by id asc  limit " + starter +" , "+ pagerow;
+		 String sql = "select id, username, password from user order by id desc  limit " + starter +" , "+ pagerow;
 		 List<User> list = jdbcTemplate.query(sql,new UserRowMapper());
 		return list;
 	}

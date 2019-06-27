@@ -100,7 +100,16 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public String addUser(User user, ModelMap modelMap) {
 		userServiceImpl.addUser(user);
-		modelMap.addAttribute("homepage", userServiceImpl.queryAllUser());
+		modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, 6));
+		int totalNum = userServiceImpl.countAllUser();
+		int totalPage = 0;
+		if (totalNum % totalNum == 0) {
+			totalPage = totalNum / 6;
+		} else {
+			totalPage = totalNum / 6 + 1;
+		}		
+		modelMap.addAttribute("currentPage", 1);
+		modelMap.addAttribute("totalPage", totalPage);
 		return "homepage";
 	}
 
@@ -116,6 +125,15 @@ public class UserController {
 		userServiceImpl.updateUser(user);
 		List<User> list = userServiceImpl.queryUserbyPage(1, 6);
 		modelMap.addAttribute("homepage", list);
+		int totalNum = userServiceImpl.countAllUser();
+		int totalPage = 0;
+		if (totalNum % 6 == 0) {
+			totalPage = totalNum / 6;
+		} else {
+			totalPage = totalNum / 6 + 1;
+		}		
+		modelMap.addAttribute("currentPage", 1);
+		modelMap.addAttribute("totalPage", totalPage);
 		return "homepage";
 	}
 
@@ -145,7 +163,16 @@ public class UserController {
 	public String deleteUser(ModelMap modelMap, int id, HttpSession session) {
 		int arg0 = userServiceImpl.deleteUser(id);
 		session.setAttribute("deleteUserArg0", arg0);
-		modelMap.addAttribute("homepage", userServiceImpl.queryAllUser());
+		modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, 6));
+		int totalNum = userServiceImpl.countAllUser();
+		int totalPage = 0;
+		if (totalNum % 6 == 0) {
+			totalPage = totalNum / 6;
+		} else {
+			totalPage = totalNum / 6 + 1;
+		}		
+		modelMap.addAttribute("currentPage", 1);
+		modelMap.addAttribute("totalPage", totalPage);
 		return "homepage";
 	}
 
@@ -168,7 +195,7 @@ public class UserController {
 		List<User> list = userServiceImpl.queryUserbyPage(currentPage, linage);
 		int totalNum = userServiceImpl.countAllUser();
 		int totalPage = 0;
-		if (totalNum % totalNum == 0) {
+		if (totalNum % linage == 0) {
 			totalPage = totalNum / linage;
 		} else {
 			totalPage = totalNum / linage + 1;
@@ -176,7 +203,8 @@ public class UserController {
 
 		System.out.println("目前分页的总页数是" + totalPage);
 		System.out.println("当前页是" + currentPage);
-		System.out.println("总数据是" + totalPage);
+		System.out.println("总数据是" + totalNum);
+
 
 		modelMap.addAttribute("homepage", list);
 		modelMap.addAttribute("currentPage", currentPage);

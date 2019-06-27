@@ -31,12 +31,6 @@
 <script type="text/javascript">
 
 
-$(function(){
-	$('.pagination li').on('click',function () {	
-	    $('.pagination li').removeClass('active');
-	    $(this).addClass('active');
-	});
-});
 
 
 
@@ -92,8 +86,8 @@ $(function(){
 					<a href="/toAddUser" th:href="@{/toAddUser}" class="btn btn-info">添加用户</a>
 				</div>
 				<!--表格开始  -->
-				<div class="table"  >
-					<table class="table table-bordered table-hover table-condensed"  style="word-break:break-all; word-wrap:break-all;">
+				<div class="table"  style="height: 340px">
+					<table class="table table-bordered table-hover "  style="word-break:break-all; word-wrap:break-all;">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -118,15 +112,14 @@ $(function(){
 				<!--表格结束  -->
 				<!--分页开始  -->
 				<div class="pull-right">
-					<nav aria-label="Page navigation">
+					<nav aria-label="...">
 						<ul class="pagination pagination-lg">
-							<li ><a th:if = "${currentPage}  gt  1" th:href="@{/queryUserByPage(currentPage=${currentPage-1})}"> 上一页</a></li>
-							<li ><a th:href="@{/queryUserByPage(currentPage=1)}">1</a></li>
-							<li><a  th:href="@{/queryUserByPage(currentPage=2)}">2</a></li>
-							<li><a th:href="@{/queryUserByPage(currentPage=3)}">3</a></li>
-							<li><a th:href="@{/queryUserByPage(currentPage=4)}">4</a></li>
-							<li><a th:href="@{/queryUserByPage(currentPage=5)}">5</a></li>
-							<li><a  th:if = "${currentPage} lt ${totalPage}" th:href="@{/queryUserByPage(currentPage=${currentPage+1})}"> 下一页</a></li>							
+							<li class="previous" >
+							   <a th:if = "${currentPage}  gt  1" th:href="@{/queryUserByPage(currentPage=${currentPage-1})}" > 上一页</a>
+							</li>
+						<!-- 	<li ><a th:href="@{/queryUserByPage(currentPage=${currentPage})}"></a></li> -->
+							<li><a  th:text="${currentPage}"></a></li>									
+							<li class="next"><a  th:if = "${currentPage} lt ${totalPage}" th:href="@{/queryUserByPage(currentPage=${currentPage+1})}"> 下一页</a></li>							
 						</ul>
 					</nav>			
 				</div>

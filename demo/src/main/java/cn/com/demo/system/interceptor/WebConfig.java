@@ -23,8 +23,8 @@ public class WebConfig implements WebMvcConfigurer {
 	 * 忽略静态资源拦截
 	 * 
 	 */
-	final String[] ignoreInterception = { "/static/**", "/bootstrap-3.3.7-dist/**", "css/**", "jquery-3.3.1/**",
-			"js/**", "assets/**", "/login", "/error/**" };
+	final String[] ignoreInterception = { "/static/**", "/bootstrap-3.3.7-dist/**", "/css/**", "/jquery-3.3.1/**",
+			"js/**", "/assets/**", "/login", "/error/**" };
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
