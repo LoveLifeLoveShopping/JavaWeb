@@ -49,18 +49,18 @@ public class UserController {
 		List<User> user = userServiceImpl.logonAudit(username, password);
 		if (user != null && user.size() == 1) {
 			session.setAttribute("username", username);
-			//获取分页数据第一页 每页6条数据
+			// 获取分页数据第一页 每页6条数据
 			modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, 6));
-			//获取总数据数量
+			// 获取总数据数量
 			int totalNum = userServiceImpl.countAllUser();
-			//总页数
+			// 总页数
 			int totalPage = 0;
 			if (totalNum % totalNum == 0) {
 				totalPage = totalNum / 6;
 			} else {
 				totalPage = totalNum / 6 + 1;
 			}
-			//默认显示第一页数据
+			// 默认显示第一页数据
 			modelMap.addAttribute("currentPage", 1);
 			modelMap.addAttribute("totalPage", totalPage);
 			return "/homepage";
@@ -107,7 +107,7 @@ public class UserController {
 			totalPage = totalNum / 6;
 		} else {
 			totalPage = totalNum / 6 + 1;
-		}		
+		}
 		modelMap.addAttribute("currentPage", 1);
 		modelMap.addAttribute("totalPage", totalPage);
 		return "homepage";
@@ -131,7 +131,7 @@ public class UserController {
 			totalPage = totalNum / 6;
 		} else {
 			totalPage = totalNum / 6 + 1;
-		}		
+		}
 		modelMap.addAttribute("currentPage", 1);
 		modelMap.addAttribute("totalPage", totalPage);
 		return "homepage";
@@ -170,7 +170,7 @@ public class UserController {
 			totalPage = totalNum / 6;
 		} else {
 			totalPage = totalNum / 6 + 1;
-		}		
+		}
 		modelMap.addAttribute("currentPage", 1);
 		modelMap.addAttribute("totalPage", totalPage);
 		return "homepage";
@@ -205,12 +205,22 @@ public class UserController {
 		System.out.println("当前页是" + currentPage);
 		System.out.println("总数据是" + totalNum);
 
-
 		modelMap.addAttribute("homepage", list);
 		modelMap.addAttribute("currentPage", currentPage);
 		modelMap.addAttribute("totalPage", totalPage);
 		return "homepage";
 
+	}
+
+	/**
+	 * 退出登录
+	 * 
+	 * @return
+	 */
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("username", null);
+		return "login";
 	}
 
 }

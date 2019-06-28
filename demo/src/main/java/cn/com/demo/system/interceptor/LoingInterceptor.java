@@ -24,7 +24,7 @@ public class LoingInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-		logger.info("进入LoginInterceptor拦截器==============");
+		logger.info("进入拦截器");
 		String basePath = request.getContextPath();
 		String path = request.getRequestURI();
 		logger.info("basePath:" + basePath);
@@ -33,12 +33,12 @@ public class LoingInterceptor implements HandlerInterceptor {
 		Object username = request.getSession().getAttribute("username");
 		if (username == null || !(username instanceof String)) {
 
-			logger.info("尚未登录，跳转到登录界面");
+			logger.info("尚未登录,跳转到登录界面");
 			response.setHeader("Content-Type", "text/html;charset=UTF-8");
 			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
 		}
-		logger.info("已登录，放行！");
+		logger.info("已登录");
 
 		return true;
 	}

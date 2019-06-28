@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- thymeleaf 导入 -->
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
@@ -8,62 +7,40 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
-
 <title>用户管理</title>
-<script type="text/javascript" src="/jquery-3.3.1/jquery-3.3.1.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- Bootstrap core CSS -->
-<link th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link th:href="@{css/ie10-viewport-bug-workaround.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}"rel="stylesheet" type="text/css" />
+<link th:href="@{css/ie10-viewport-bug-workaround.css}" rel="stylesheet"type="text/css" />
 <!-- 模板样式 -->
 <link th:href="@{/css/dashboard.css}" rel="stylesheet" type="text/css" />
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="/js/ie-emulation-modes-warning.js"></script>
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]><![endif]-->
 <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-<script type="text/javascript">
-
-
-
-
-
-
-
-
-</script>
+<script src="/js/holder.min.js"></script>	
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
 </head>
 
 <body>
 	<!-- 导航开始 -->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar  navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">用户管理</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">仪表盘</a></li>
-					<li><a href="#">设置</a></li>
-					<li><a href="#">简况</a></li>
-					<li><a href="#">帮助</a></li>
+		        <div class="navbar-header">
+		          <a class="navbar-brand" href="#">系统管理</a>
+		        </div>
+			<div id="navbar" class="   navbar-collapse collapse ">
+				<!-- Single button -->
+				<ul class=" nav navbar-nav navbar-right ">
+					<li><a href="#" th:text="'欢迎您: ' + ${session.username} + ''"></a></li>
+					<!-- 登录和注销 -->
+					<li class="dropdown"><a href="#" data-toggle="dropdown"> <span
+							class="glyphicon glyphicon-th-list"></span><span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/logout" th:href="@{/logout}"  >退出</a></li>
+						</ul>
+					</li>
 				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Search...">
-				</form>
 			</div>
 		</div>
 	</nav>
@@ -86,8 +63,9 @@
 					<a href="/toAddUser" th:href="@{/toAddUser}" class="btn btn-info">添加用户</a>
 				</div>
 				<!--表格开始  -->
-				<div class="table"  style="height: 340px">
-					<table class="table table-bordered table-hover "  style="word-break:break-all; word-wrap:break-all;">
+				<div class="table" style="height: 340px">
+					<table class="table table-bordered table-hover "
+						style="word-break: break-all; word-wrap: break-all;">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -105,7 +83,6 @@
 								<td><a th:href="@{/toUpdateUser(id=${user.id})}">更新</a></td>
 								<td><a th:href="@{/deleteUser(id=${user.id})}">删除</a></td>
 							</tr>
-							
 						</tbody>
 					</table>
 				</div>
@@ -114,32 +91,21 @@
 				<div class="pull-right">
 					<nav aria-label="...">
 						<ul class="pagination pagination-lg">
-							<li class="previous" >
-							   <a th:if = "${currentPage}  gt  1" th:href="@{/queryUserByPage(currentPage=${currentPage-1})}" > 上一页</a>
-							</li>
-						<!-- 	<li ><a th:href="@{/queryUserByPage(currentPage=${currentPage})}"></a></li> -->
-							<li><a  th:text="${currentPage}"></a></li>									
-							<li class="next"><a  th:if = "${currentPage} lt ${totalPage}" th:href="@{/queryUserByPage(currentPage=${currentPage+1})}"> 下一页</a></li>							
+							<li class="previous"><a th:if="${currentPage}  gt  1"
+								th:href="@{/queryUserByPage(currentPage=${currentPage-1})}">
+									上一页</a></li>
+							<!-- 	<li ><a th:href="@{/queryUserByPage(currentPage=${currentPage})}"></a></li> -->
+							<li><a th:text="${currentPage}"></a></li>
+							<li class="next"><a th:if="${currentPage} lt ${totalPage}"
+								th:href="@{/queryUserByPage(currentPage=${currentPage+1})}">
+									下一页</a></li>
 						</ul>
-					</nav>			
+					</nav>
 				</div>
 				<!-- 分页结束 -->
-
 			</div>
 		</div>
 	</div>
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-	<script
-		src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-	<script src="/js/holder.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 
 </html>

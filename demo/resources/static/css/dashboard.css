@@ -13,8 +13,8 @@ body {
  */
 
 .sub-header {
-    padding-bottom: 1px;
-    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    border-bottom: 10px solid #eee;
 }
 
 /*
@@ -56,8 +56,8 @@ body {
     margin-left: -20px;
 }
 .nav-sidebar > li > a {
-    padding-right: 2px;
-    padding-left: 2px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
@@ -72,12 +72,12 @@ body {
  */
 
 .main {
-    padding: 2px;
+    padding: 20px;
 }
 @media (min-width: 768px) {
     .main {
-        padding-right: 2px;
-        padding-left: 2px;
+        padding-right: 20px;
+        padding-left: 20px;
     }
 }
 .main .page-header {

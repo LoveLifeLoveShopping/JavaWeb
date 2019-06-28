@@ -7,7 +7,7 @@
 <title>user</title>
 <link th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}"
 	rel="stylesheet" type="text/css" />
-	<style type="text/css">
+<style type="text/css">
 .col-center-block {
 	float: none;
 	display: block;
@@ -17,12 +17,17 @@
 </style>
 </head>
 <body class="container">
-	<br /><br /><br /><br /><br /><br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
 	<div class="container">
 		<div class="row myCenter">
 			<div class="col-xs-7 col-md-3 col-center-block">
 				<h1>修改用户</h1>
-				<div   class="with:80%">
+				<div class="with:80%">
 					<form class="form-horizontal" th:action="@{/updateUser}"
 						th:object="${user}" method="post">
 						<input type="hidden" name="id" th:value="*{id}" />

@@ -11,11 +11,17 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * WEB拦截
+ * 
+ * @author min
+ *
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-	
+
 	Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	LoingInterceptor loginInterceptor;
 
@@ -49,9 +55,9 @@ public class WebConfig implements WebMvcConfigurer {
 	 * addResourceLocations指的是文件放置的目录，addResoureHandler指的是对外暴露的访问路径
 	 */
 	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// 排除静态资源拦截
-		registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");	
+		registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 

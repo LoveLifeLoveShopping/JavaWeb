@@ -1,6 +1,5 @@
 package cn.com.demo.system.dao.impl;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,6 +31,9 @@ public class UserDaoImpl implements IUserDao {
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class));
 	}
 
+	/**
+	 * 登录验证
+	 */
 	@Override
 	public List<User> logonAudit(String username, String password) {
 		String sql = "SELECT id,username,password FROM user WHERE username = ? and password = ? ";
@@ -39,13 +41,21 @@ public class UserDaoImpl implements IUserDao {
 				new BeanPropertyRowMapper<User>(User.class));
 	}
 
+	/**
+	 * 用户更新
+	 * 
+	 */
 	@Override
 	public User updateUser(User user) {
 		String sql = "UPDATE USER SET username=?,password=? WHERE id=?";
-		jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getId());		
+		jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getId());
 		return user;
 	}
 
+	/**
+	 * 添加用户
+	 * 
+	 */
 	@Override
 	public User addUser(User user) {
 		String sql = "INSERT INTO user (username,password) VALUES(?,?)";
@@ -53,13 +63,21 @@ public class UserDaoImpl implements IUserDao {
 		return user;
 	}
 
+	/**
+	 * 删除用户
+	 * 
+	 */
 	@Override
 	public int deleteUser(int id) {
 		String sql = "DELETE FROM user WHERE id=? ";
-		 int arg0 =  jdbcTemplate.update(sql, id);
-         return arg0;		 
+		int arg0 = jdbcTemplate.update(sql, id);
+		return arg0;
 	}
 
+	/**
+	 * 获取用户
+	 * 
+	 */
 	@Override
 	public User getUser(int id) {
 		String sql = "select * from user where id = ?";
@@ -72,6 +90,12 @@ public class UserDaoImpl implements IUserDao {
 
 	}
 
+	/**
+	 * 获取用户
+	 * 
+	 * @author min
+	 *
+	 */
 	private class UserRowMapper implements RowMapper<User> {
 		@Override
 		public User mapRow(ResultSet rs, int arg0) throws SQLException {
@@ -90,15 +114,18 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	@Override
 	public List<User> queryUserbyPage(int pagenum, int pagerow) {
-		int starter = (pagenum-1)*pagerow;
-		 String sql = "select id, username, password from user order by id desc  limit " + starter +" , "+ pagerow;
-		 List<User> list = jdbcTemplate.query(sql,new UserRowMapper());
+		int starter = (pagenum - 1) * pagerow;
+		String sql = "select id, username, password from user order by id desc  limit " + starter + " , " + pagerow;
+		List<User> list = jdbcTemplate.query(sql, new UserRowMapper());
 		return list;
 	}
 
+	/**
+	 * 统计用户数量
+	 */
 	@Override
 	public int countAllUser() {
-		String sql = "select  count(1)  from user  " ;
+		String sql = "select  count(1)  from user  ";
 		int countAllUaer = jdbcTemplate.queryForObject(sql, Integer.class);
 		return countAllUaer;
 	}
