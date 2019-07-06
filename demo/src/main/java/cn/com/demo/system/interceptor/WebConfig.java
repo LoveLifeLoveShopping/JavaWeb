@@ -30,7 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
 	 * 
 	 */
 	final String[] ignoreInterception = { "/static/**", "/bootstrap-3.3.7-dist/**", "/css/**", "/jquery-3.3.1/**",
-			"js/**", "/assets/**", "/login", "/error/**" };
+			"js/**", "/assets/**", "/login", "/error/**","/resources/**","/images/**" };
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
