@@ -27,7 +27,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	@Transactional(readOnly = true)
 	public List<User> queryAllUser() {
-		String sql = "SELECT id,username,password FROM user";
+		String sql = "SELECT id,username,password FROM t_user";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class));
 	}
 
@@ -36,7 +36,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	@Override
 	public List<User> logonAudit(String username, String password) {
-		String sql = "SELECT id,username,password FROM user WHERE username = ? and password = ? ";
+		String sql = "SELECT id,username,password FROM t_user WHERE username = ? and password = ? ";
 		return jdbcTemplate.query(sql, new Object[] { username, password },
 				new BeanPropertyRowMapper<User>(User.class));
 	}
@@ -47,7 +47,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	@Override
 	public User updateUser(User user) {
-		String sql = "UPDATE USER SET username=?,password=? WHERE id=?";
+		String sql = "UPDATE t_user SET username=?,password=? WHERE id=?";
 		jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getId());
 		return user;
 	}
@@ -58,7 +58,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	@Override
 	public User addUser(User user) {
-		String sql = "INSERT INTO user (username,password) VALUES(?,?)";
+		String sql = "INSERT INTO t_user (username,password) VALUES(?,?)";
 		jdbcTemplate.update(sql, user.getUsername(), user.getPassword());
 		return user;
 	}
@@ -69,7 +69,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	@Override
 	public int deleteUser(int id) {
-		String sql = "DELETE FROM user WHERE id=? ";
+		String sql = "DELETE FROM t_user WHERE id=? ";
 		int arg0 = jdbcTemplate.update(sql, id);
 		return arg0;
 	}
@@ -80,7 +80,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	@Override
 	public User getUser(int id) {
-		String sql = "select * from user where id = ?";
+		String sql = "select * from t_user where id = ?";
 		List<User> userList = this.jdbcTemplate.query(sql, new UserRowMapper(), id);
 		if (userList != null && userList.size() > 0) {
 			return userList.get(0);
@@ -115,7 +115,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> queryUserbyPage(int pagenum, int pagerow) {
 		int starter = (pagenum - 1) * pagerow;
-		String sql = "select id, username, password from user order by id desc  limit " + starter + " , " + pagerow;
+		String sql = "select id, username, password from t_user order by id desc  limit " + starter + " , " + pagerow;
 		List<User> list = jdbcTemplate.query(sql, new UserRowMapper());
 		return list;
 	}
@@ -125,7 +125,7 @@ public class UserDaoImpl implements IUserDao {
 	 */
 	@Override
 	public int countAllUser() {
-		String sql = "select  count(1)  from user  ";
+		String sql = "select  count(1)  from t_user  ";
 		int countAllUaer = jdbcTemplate.queryForObject(sql, Integer.class);
 		return countAllUaer;
 	}

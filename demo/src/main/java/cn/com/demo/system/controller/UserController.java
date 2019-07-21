@@ -17,6 +17,9 @@ import cn.com.demo.system.service.impl.UserServiceImpl;
 
 @Controller
 public class UserController {
+	
+	//每页PAGE_NUM条数据
+	private final static int PAGE_NUM = 6; 
 
 	@Autowired
 	private UserServiceImpl userServiceImpl;
@@ -49,16 +52,16 @@ public class UserController {
 		List<User> user = userServiceImpl.logonAudit(username, password);
 		if (user != null && user.size() == 1) {
 			session.setAttribute("username", username);
-			// 获取分页数据第一页 每页6条数据
-			modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, 6));
+			// 获取分页数据第一页 每页PAGE_NUM条数据
+			modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, PAGE_NUM));
 			// 获取总数据数量
 			int totalNum = userServiceImpl.countAllUser();
 			// 总页数
 			int totalPage = 0;
 			if (totalNum % totalNum == 0) {
-				totalPage = totalNum / 6;
+				totalPage = totalNum / PAGE_NUM;
 			} else {
-				totalPage = totalNum / 6 + 1;
+				totalPage = totalNum / PAGE_NUM + 1;
 			}
 			// 默认显示第一页数据
 			modelMap.addAttribute("currentPage", 1);
@@ -100,13 +103,13 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public String addUser(User user, ModelMap modelMap) {
 		userServiceImpl.addUser(user);
-		modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, 6));
+		modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, PAGE_NUM));
 		int totalNum = userServiceImpl.countAllUser();
 		int totalPage = 0;
 		if (totalNum % totalNum == 0) {
-			totalPage = totalNum / 6;
+			totalPage = totalNum / PAGE_NUM;
 		} else {
-			totalPage = totalNum / 6 + 1;
+			totalPage = totalNum / PAGE_NUM + 1;
 		}
 		modelMap.addAttribute("currentPage", 1);
 		modelMap.addAttribute("totalPage", totalPage);
@@ -123,14 +126,14 @@ public class UserController {
 	@PostMapping("/updateUser")
 	public String updateUser(User user, ModelMap modelMap) {
 		userServiceImpl.updateUser(user);
-		List<User> list = userServiceImpl.queryUserbyPage(1, 6);
+		List<User> list = userServiceImpl.queryUserbyPage(1, PAGE_NUM);
 		modelMap.addAttribute("homepage", list);
 		int totalNum = userServiceImpl.countAllUser();
 		int totalPage = 0;
-		if (totalNum % 6 == 0) {
-			totalPage = totalNum / 6;
+		if (totalNum % PAGE_NUM == 0) {
+			totalPage = totalNum / PAGE_NUM;
 		} else {
-			totalPage = totalNum / 6 + 1;
+			totalPage = totalNum / PAGE_NUM + 1;
 		}
 		modelMap.addAttribute("currentPage", 1);
 		modelMap.addAttribute("totalPage", totalPage);
@@ -163,13 +166,13 @@ public class UserController {
 	public String deleteUser(ModelMap modelMap, int id, HttpSession session) {
 		int arg0 = userServiceImpl.deleteUser(id);
 		session.setAttribute("deleteUserArg0", arg0);
-		modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, 6));
+		modelMap.addAttribute("homepage", userServiceImpl.queryUserbyPage(1, PAGE_NUM));
 		int totalNum = userServiceImpl.countAllUser();
 		int totalPage = 0;
-		if (totalNum % 6 == 0) {
-			totalPage = totalNum / 6;
+		if (totalNum % PAGE_NUM == 0) {
+			totalPage = totalNum / PAGE_NUM;
 		} else {
-			totalPage = totalNum / 6 + 1;
+			totalPage = totalNum / PAGE_NUM + 1;
 		}
 		modelMap.addAttribute("currentPage", 1);
 		modelMap.addAttribute("totalPage", totalPage);
@@ -190,7 +193,7 @@ public class UserController {
 			currentPage = 1;
 		}
 		if (linage == null || linage == 0) {
-			linage = 6;
+			linage = PAGE_NUM;
 		}
 		List<User> list = userServiceImpl.queryUserbyPage(currentPage, linage);
 		int totalNum = userServiceImpl.countAllUser();
