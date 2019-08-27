@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="images/favicon.ico">
+<title>登录</title>
+<link th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+<link href="../../assets/css/ie10-viewport-bug-workaround.css"
+	rel="stylesheet">
+<link th:href="@{/css/signin.css}" rel="stylesheet" type="text/css" />
+<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<form class="form-signin" th:action="@{/login}" method="post">
+			<h2 class="form-signin-heading">登录</h2>
+			<span th:text="${errors}" style="color: red"></span> <label
+				for="inputEmail" class="sr-only">用户名</label> <input type="text"
+				id="inputEmail" class="form-control" placeholder="用户名" required
+				autofocus name="username"> <label for="inputPassword"
+				class="sr-only">密码</label> <input type="password" id="inputPassword"
+				class="form-control" placeholder="密码" required name="password">
+			<div class="checkbox">
+				<label> <input type="checkbox" value="remember-me">记住我
+				</label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+		</form>
+	</div>
+</body>
+</html>

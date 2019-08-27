@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<contextName>demo</contextName>
+	<property name="log.path" value="D:/Log" />
+		
+    <!--输出到文件-->
+    <appender name="logInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <append>true</append>
+        <!--日志文件输出格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset> <!-- 设置字符集 -->
+        </encoder>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志归档 -->
+            <fileNamePattern>${log.path}/demo-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--日志文件保留天数-->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+    </appender>
+	<!-- 控制台输出 -->
+	<appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">	
+		<encoder  class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{50}- %msg%n</pattern>				
+		</encoder>
+	</appender>
+	<!--指定最基础的日志输出级别 -->
+	<root level="INFO">		
+		<appender-ref ref="consoleLog" />
+		<appender-ref ref="logInfo" />
+	</root>
+</configuration>

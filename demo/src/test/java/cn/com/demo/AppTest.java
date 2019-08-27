@@ -1,10 +1,8 @@
 package cn.com.demo;
 
-
-
-/**
- * Unit test for simple App.
- */
 public class AppTest {
-   
+
+    public static void main(String[] agrs) {
+        System.out.println("Hello World!");
+    }
 }

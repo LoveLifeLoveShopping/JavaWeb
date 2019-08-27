@@ -18,9 +18,9 @@ USE `demo`;
 
 /*Table structure for table `user` */
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `t_user`;
 
-CREATE TABLE `user` (
+CREATE TABLE `t_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,

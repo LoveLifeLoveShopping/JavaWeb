@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="description" content="">
+<meta name="author" content="">
+<title>用户管理</title>
+<script type="text/javascript" src="/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<link th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+<link th:href="@{css/ie10-viewport-bug-workaround.css}" rel="stylesheet"
+	type="text/css" />
+<!-- 模板样式 -->
+<link th:href="@{/css/dashboard.css}" rel="stylesheet" type="text/css" />
+<script src="/js/ie-emulation-modes-warning.js"></script>
+<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<script src="/js/holder.min.js"></script>
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+</head>
+
+<body>
+	<!-- 导航开始 -->
+	<nav class="navbar  navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">系统管理</a>
+			</div>
+			<div id="navbar" class="   navbar-collapse collapse ">
+				<!-- Single button -->
+				<ul class=" nav navbar-nav navbar-right ">
+					<li><a href="#" th:text="'欢迎您: ' + ${session.username} + ''"></a></li>
+					<!-- 登录和注销 -->
+					<li class="dropdown"><a href="#" data-toggle="dropdown"> <span
+							class="glyphicon glyphicon-th-list"></span><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/logout" th:href="@{/logout}">退出</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- 导航结束 -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- 左边导航开始 -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<li class="active"><a href="#">用户管理 <span class="sr-only">(current)</span></a></li>
+					<li class="treeview"><a href="#" class="mymenu"> <span>菜单D</span>
+							<span class="glyphicon glyphicon-menu-left pull-right"></span>
+					</a>
+						<ul class="treeview-menu">
+							<li class="_menuitem"><a href="#"> 菜单D1</a></li>
+							<li class="_menuitem"><a href="#"> 菜单D2</a></li>
+							<li class="_menuitem"><a href="#"> 菜单D3</a></li>
+							<li class="_menuitem"><a href="#"> 菜单D4</a></li>
+						</ul></li>
+					<li><a href="#">分析</a></li>
+					<li><a href="#">导出</a></li>
+				</ul>
+			</div>
+			<!-- 左边导航结束 -->
+			<div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
+				<h2 class="sub-header">用户列表</h2>
+				<div>
+					<a href="/toAddUser" th:href="@{/toAddUser}" class="btn btn-info">添加用户</a>
+				</div>
+				<!--表格开始  -->
+				<div class="table" style="height: 340px">
+					<table class="table table-bordered table-hover "
+						style="word-break: break-all; word-wrap: break-all;">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>用户名</th>
+								<th>密码</th>
+								<th>更新</th>
+								<th>删除</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user : ${homepage}">
+								<th scope="row" th:text="${user.id}"></th>
+								<td th:text="${user.username}"></td>
+								<td th:text="${user.password}"></td>
+								<td><a th:href="@{/toUpdateUser(id=${user.id})}">更新</a></td>
+								<td><a th:href="@{/deleteUser(id=${user.id})}">删除</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!--表格结束  -->
+				<!--分页开始  -->
+				<div class="pull-right">
+					<nav aria-label="...">
+						<ul class="pagination pagination-lg">
+							<li class="previous"><a th:if="${currentPage}  gt  1"
+								th:href="@{/queryUserByPage(currentPage=${currentPage-1})}">
+									上一页</a></li>
+							<!-- 	<li ><a th:href="@{/queryUserByPage(currentPage=${currentPage})}"></a></li> -->
+							<li><a th:text="${currentPage}"></a></li>
+							<li class="next"><a th:if="${currentPage} lt ${totalPage}"
+								th:href="@{/queryUserByPage(currentPage=${currentPage+1})}">
+									下一页</a></li>
+						</ul>
+					</nav>
+				</div>
+				<!-- 分页结束 -->
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -22,6 +22,21 @@
 <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <script src="/js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc.js"></script>
+<script type="text/javascript">
+QC.Login.insertButton({
+	btnId : 'qqLoginBtn',//插入按钮的html标签id
+	size : 'A_XL',//按钮样式，A、B、C为三种样式， 
+		//S、M、L、XL为同一种样式的不同尺寸，支持如下 : 
+									//A_S, A_M, A_L, A_XL; 
+									//B_S, B_M, B_L; 
+									//C_S;
+
+	clientId : '222222',//appId
+	scope : '',//授权范围，可选
+	'btnMode':'showUserAfterLogin'
+});
+</script>
 </head>
 
 <body>
@@ -38,7 +53,11 @@
 				<label> <input type="checkbox" value="remember-me">记住我
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">	
+			登录</button>
+			<button class="btn btn-lg btn-primary btn-block" type="">
+			<span id="qqLoginBtn"></span>
+			QQ登录</button>
 		</form>
 	</div>
 </body>
